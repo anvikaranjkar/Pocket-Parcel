@@ -406,8 +406,8 @@ export default function Home() {
           </section>
         ) : (
           <section className="reveal-stage" aria-labelledby="reveal-title">
-            <p className="eyebrow">Parcel opened — good things escaped</p><h1 id="reveal-title">For you, <em>{parcel.recipient}.</em></h1>
-            {parcel.message && <blockquote className="message-card"><span className="tape message-tape" aria-hidden="true" /><p>“{parcel.message}”</p><footer>— {parcel.sender}</footer></blockquote>}
+            <p className="eyebrow">Parcel opened, good things escaped</p><h1 id="reveal-title">For you, <em>{parcel.recipient}.</em></h1>
+            {parcel.message && <blockquote className="message-card"><span className="tape message-tape" aria-hidden="true" /><p>“{parcel.message}”</p><footer>From {parcel.sender}</footer></blockquote>}
             <div className="goodies-reveal" aria-label="Your parcel goodies">
               {parcel.items.map((packed, index) => {
                 const goodie = GOODIES.find((item) => item.id === packed.id)!;
@@ -427,7 +427,7 @@ export default function Home() {
         <header className="brand-row"><Brand /><span className="tiny-stamp">ready to roam</span></header>
         <section className="share-layout" aria-labelledby="share-title">
           <div className="share-copy"><p className="eyebrow">Sealed with excellent intentions</p><h1 id="share-title">Your parcel is<br /><em>ready to go.</em></h1><p>Send this little link to {parcel.recipient}. Every custom detail travels inside it.</p>
-            <div className="share-field-wrap"><label htmlFor="share-link">Your shareable parcel link</label><div className="share-field"><input id="share-link" readOnly value={shareUrl} onFocus={(event) => event.currentTarget.select()} /><button type="button" onClick={copyLink}>{copied ? "Copied!" : "Copy link"}</button></div><p className={`copy-status ${copied ? "show" : ""}`} aria-live="polite">Copied — go make someone’s day.</p></div>
+            <div className="share-field-wrap"><label htmlFor="share-link">Your shareable parcel link</label><div className="share-field"><input id="share-link" readOnly value={shareUrl} onFocus={(event) => event.currentTarget.select()} /><button type="button" onClick={copyLink}>{copied ? "Copied!" : "Copy link"}</button></div><p className={`copy-status ${copied ? "show" : ""}`} aria-live="polite">Copied. Go make someone’s day.</p></div>
             <div className="share-actions"><a className="primary-button" href={shareUrl}>Preview their parcel</a><button className="text-button" type="button" onClick={() => setScreen("create")}>Edit parcel</button></div>
           </div>
           <div className="share-parcel-wrap"><div className="seal-badge" aria-hidden="true">ready!</div><ParcelFace recipient={parcel.recipient} sender={parcel.sender} /><p className="contents-line">{parcel.items.length} customised {parcel.items.length === 1 ? "goodie" : "goodies"} tucked inside</p></div>
@@ -439,24 +439,24 @@ export default function Home() {
   return (
     <main className="maker-shell" id="top">
       <header className="brand-row"><Brand /><span className="tiny-stamp">made with a little heart</span></header>
-      <section className="intro"><p className="eyebrow">A small something, sent softly</p><h1>Pack a little<br /><em>brightness.</em></h1><p className="intro-copy">Choose every detail — the tea, the joke, the flowers, the playlist and more — then send it all with one free link.</p></section>
+      <section className="intro"><p className="eyebrow">A small something, sent softly</p><h1>Pack a little<br /><em>brightness.</em></h1><p className="intro-copy">Choose every detail: the tea, the joke, the flowers, the playlist and more. Then send it all with one free link.</p></section>
 
       <form onSubmit={packParcel} noValidate>
         <section className="parcel-workbench" aria-labelledby="address-title">
           <div className="parcel-editor"><span className="airmail-stripe" aria-hidden="true" /><span className="tape tape-left" aria-hidden="true" /><span className="tape tape-right" aria-hidden="true" /><div className="parcel-stamp" aria-hidden="true"><span>GOOD</span><strong>POST</strong><small>JUST BECAUSE</small></div>
             <div className="address-card"><label htmlFor="recipient">FOR</label><input id="recipient" value={parcel.recipient} onChange={(event) => updateField("recipient", event.target.value)} placeholder="someone lovely" autoComplete="off" maxLength={40} required /><span className="address-rule" /><label htmlFor="sender">FROM</label><input id="sender" value={parcel.sender} onChange={(event) => updateField("sender", event.target.value)} placeholder="you" autoComplete="off" maxLength={40} required /></div><p className="parcel-note">Packed in the tiny-but-mighty department</p>
           </div>
-          <div className="message-panel"><p className="eyebrow">Step one — address it</p><h2 id="address-title">Who’s this little parcel for?</h2><label htmlFor="message">A note to tuck under the flap <span>(optional)</span></label><textarea id="message" value={parcel.message} onChange={(event) => updateField("message", event.target.value)} placeholder="A few words from your heart…" maxLength={280} rows={5} /><div className="character-count">{parcel.message.length}/280</div></div>
+          <div className="message-panel"><p className="eyebrow">Step one: address it</p><h2 id="address-title">Who’s this little parcel for?</h2><label htmlFor="message">A note to tuck under the flap <span>(optional)</span></label><textarea id="message" value={parcel.message} onChange={(event) => updateField("message", event.target.value)} placeholder="A few words from your heart…" maxLength={280} rows={5} /><div className="character-count">{parcel.message.length}/280</div></div>
         </section>
 
         <section className="items-section" aria-labelledby="items-title">
-          <div className="items-heading"><div><p className="eyebrow">Step two — make every bit theirs</p><h2 id="items-title">Open a goodie to customise it</h2></div><p className="selected-count" aria-live="polite"><strong>{parcel.items.length}</strong> packed</p></div>
+          <div className="items-heading"><div><p className="eyebrow">Step two: make every bit theirs</p><h2 id="items-title">Open a goodie to customise it</h2></div><p className="selected-count" aria-live="polite"><strong>{parcel.items.length}</strong> packed</p></div>
           <div className="items-grid">
             {GOODIES.map((goodie) => {
               const selected = parcel.items.some((item) => item.id === goodie.id);
               return (
                 <article className={`goodie-card ${goodie.color} ${selected ? "selected" : ""}`} key={goodie.id}>
-                  <button className="goodie-open" type="button" onClick={() => openCustomizer(goodie.id)} aria-label={`${selected ? "Customise" : "Add"} ${goodie.name}`}><span className="cutout-stage"><img src={goodie.image} alt={goodie.alt} /></span><span className="goodie-name">{goodie.name}</span><span className="goodie-action">{selected ? "Customised — open again" : goodie.invitation}</span></button>
+                  <button className="goodie-open" type="button" onClick={() => openCustomizer(goodie.id)} aria-label={`${selected ? "Customise" : "Add"} ${goodie.name}`}><span className="cutout-stage"><img src={goodie.image} alt={goodie.alt} /></span><span className="goodie-name">{goodie.name}</span><span className="goodie-action">{selected ? "Customised. Open again" : goodie.invitation}</span></button>
                   {selected && <button className="remove-goodie" type="button" onClick={() => removeItem(goodie.id)} aria-label={`Remove ${goodie.name}`}>remove</button>}
                 </article>
               );
@@ -464,7 +464,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="packing-bar" aria-label="Finish your parcel"><div><p className="eyebrow">Step three — send some softness</p><h2>Happy with everything inside?</h2></div><div className="pack-actions"><p className={`form-warning ${warning ? "show" : ""}`} role="alert">{warning}</p><button className="primary-button pack-button" type="submit">Pack parcel</button></div></section>
+        <section className="packing-bar" aria-label="Finish your parcel"><div><p className="eyebrow">Step three: send some softness</p><h2>Happy with everything inside?</h2></div><div className="pack-actions"><p className={`form-warning ${warning ? "show" : ""}`} role="alert">{warning}</p><button className="primary-button pack-button" type="submit">Pack parcel</button></div></section>
       </form>
       <footer className="site-footer"><span>Pocket Parcel</span><span>Hand-packed on the internet</span><span>No postage. No paywall. Just care.</span></footer>
 

@@ -43,7 +43,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: var(--ivory); font-family: var(--font-sans), sans-serif; }
-body::before { content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .34; z-index: 30; background-image: radial-gradient(#4b4437 .55px, transparent .75px), radial-gradient(#fff .5px, transparent .7px); background-position: 0 0, 4px 6px; background-size: 9px 9px, 11px 11px; mix-blend-mode: multiply; }
+body::before { display: none; }
 button, input, textarea { font: inherit; color: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
@@ -494,4 +494,50 @@ textarea { width: 100%; resize: vertical; min-height: 132px; border: 1.5px solid
   .reveal-card.garden .reveal-image-wrap,
   .reveal-card.photo .reveal-image-wrap { display: none; }
   .recipient-garden img { width: 62px; height: 96px; }
+}
+
+/* Crisp stationery with selected rough vintage edges */
+.parcel-editor,
+.parcel-preview {
+  background-color: transparent;
+  background-image: url("/paper/vintage-postcard.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(8px 11px 5px rgba(41, 41, 37, .2));
+  clip-path: polygon(2% 4%, 13% 3%, 24% 4%, 35% 3%, 48% 4%, 61% 3%, 74% 4%, 87% 3%, 98% 5%, 99% 18%, 98% 33%, 99% 48%, 98% 64%, 99% 80%, 97% 96%, 84% 97%, 72% 96%, 59% 98%, 46% 96%, 33% 98%, 20% 96%, 3% 97%, 2% 82%, 1% 68%, 2% 51%, 1% 35%, 2% 18%);
+}
+.airmail-stripe { display: none; }
+.address-card {
+  background: rgba(255, 250, 240, .82);
+  border-radius: 1px;
+  box-shadow: 3px 4px 0 rgba(41, 41, 37, .13);
+}
+.goodie-card,
+.reveal-card,
+.custom-modal,
+.flower-choice,
+.share-field,
+.message-panel textarea,
+.modal-field input,
+.modal-field select,
+.modal-field textarea,
+.primary-button,
+.secondary-button,
+.coupon-content {
+  border-radius: 2px;
+}
+.goodie-card:nth-child(4n + 2),
+.reveal-card:nth-child(3n + 2) { border-radius: 4px 1px 3px 0; }
+.goodie-card:nth-child(4n + 3),
+.reveal-card:nth-child(3n + 3) { border-radius: 0 3px 1px 4px; }
+.selected-count,
+.remove-goodie,
+.unwrap-prompt { border-radius: 2px; }
+.message-card {
+  border-radius: 0;
+  clip-path: polygon(1% 3%, 13% 1%, 27% 3%, 42% 1%, 57% 3%, 72% 1%, 87% 3%, 99% 1%, 98% 18%, 100% 35%, 98% 52%, 100% 70%, 98% 98%, 83% 96%, 68% 99%, 51% 97%, 35% 99%, 19% 96%, 1% 98%, 2% 77%, 0 60%, 2% 43%, 0 24%);
 }
